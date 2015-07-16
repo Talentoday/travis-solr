@@ -25,9 +25,9 @@ run() {
     cd $1/example
     if [ $DEBUG ]
     then
-        java -Djetty.port=$SOLR_PORT -jar start.jar &
+        java -Xmx256m -Xms128m -Djetty.port=$SOLR_PORT -jar start.jar &
     else
-        java -Djetty.port=$SOLR_PORT -jar start.jar > /dev/null 2>&1 &
+        java -Xmx256m -Xms128m -Djetty.port=$SOLR_PORT -jar start.jar > /dev/null 2>&1 &
     fi
     wait_for_solr
     cd ../../
