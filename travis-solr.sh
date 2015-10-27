@@ -3,9 +3,17 @@
 SOLR_PORT=${SOLR_PORT:-8983}
 
 download() {
-    echo "Downloading solr from $1..."
-    curl $1 | tar xz
-    echo "Downloaded"
+    FILE="$2.tgz"
+    if [ -f $FILE ];
+    then
+       echo "File $FILE exists."
+       tar -zxf $FILE
+    else
+       echo "File $FILE does not exist. Downloading solr from $1..."
+       curl -O $1
+       tar -zxf $FILE
+    fi
+    echo "Downloaded!"
 }
 
 is_solr_up(){
@@ -133,7 +141,7 @@ download_and_run() {
             ;;
     esac
 
-    download $url
+    download $url $dir_name
 
     # copies custom configurations
     for file in $SOLR_CONFS
