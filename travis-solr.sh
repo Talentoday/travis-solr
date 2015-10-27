@@ -9,7 +9,7 @@ download() {
        echo "File $FILE exists."
        tar -zxf $FILE
     else
-       rm-rf $FILE
+       rm -rf $FILE
        echo "File $FILE does not exist. Downloading solr from $1..."
        curl -O $1
        tar -zxf $FILE
